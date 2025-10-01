@@ -1,3 +1,15 @@
+class Student:
+    def __init__(self, name, age):
+        self.name = name
+        self.age = age
+        
+
+    def __str__(self):
+        return f"name: {self.name}, age: {self.age}"
+        
+    def has_name(self, search_name):
+        return self.name.upper() == search_name.upper()   
+
 
 student_list = []
 average_age = 0
@@ -16,24 +28,27 @@ while (start_buttom):
     if menu_input == "1":
         student_name = input("Name: ")
         student_age = int(input("Age: "))
-        student_dict = {"name": student_name, "age": student_age}
+        student_dict = Student(student_name, student_age)
         student_list.append(student_dict)
         
 
         print("Student has been added: ")
-        print(f"name: {student_dict["name"]}, age: {student_dict['age']}")
+        print(student_dict)
         
     elif menu_input == "2":
-        for student in student_list:
-            print(f"name: {student["name"]}, age: {student["age"]}")
+        if len(student_list) == 0:
+            print("Student list is empty")
+        else:
+            for student in student_list:
+                print(student)
 
     elif menu_input == "3":
         found = False
         search = input ("Type students name: ")
         for student in student_list:
-            if search.upper() == student["name"].upper():
+            if student.has_name(search):
                 found = True
-                print("Student found in studentlist")
+                print("Student found in student list")
             else:
                 print("Student was not found")    
 
@@ -41,7 +56,7 @@ while (start_buttom):
         if len(student_list) > 0:
             total_age = 0
             for student in student_list:
-                total_age += student["age"]
+                total_age = sum(student.age for student in student_list)
                 average_age = total_age / len(student_list)
             print(f"Average age: {average_age}")
         else:
@@ -52,4 +67,3 @@ while (start_buttom):
         
     else: 
         print("It has to be 1-5")
-        
