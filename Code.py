@@ -10,6 +10,14 @@ class Student:
     def has_name(self, search_name):
         return self.name.upper() == search_name.upper()   
 
+def get_number(number_text):
+    while True:
+        try:
+            number = int(input(number_text))
+        except ValueError:
+            print("It has to be a number")
+        else:
+            return number
 
 student_list = []
 average_age = 0
@@ -27,7 +35,7 @@ while (start_buttom):
 
     if menu_input == "1":
         student_name = input("Name: ")
-        student_age = int(input("Age: "))
+        student_age = get_number("Age: ")
         student_dict = Student(student_name, student_age)
         student_list.append(student_dict)
         
